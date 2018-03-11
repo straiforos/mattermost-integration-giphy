@@ -84,7 +84,7 @@ def giphy_translate(text):
         params = {}
         params['text'] = text
 
-        resp = requests.get('{}://https://rightgif.com/search/web'.format(SCHEME), params=params, verify=True)
+        resp = requests.get('https://https://rightgif.com/search/web'.format(SCHEME), params=params, verify=True)
 
         if resp.status_code is not requests.codes.ok:
             logging.error('Encountered error using RightGIF API, text=%s, status=%d, response_body=%s' % (text, resp.status_code, resp.json()))
