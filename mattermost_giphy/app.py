@@ -58,7 +58,7 @@ def new_post():
             translate_text = data['text'][len(data['trigger_word']):]
 
         if not translate_text:
-            raise Exception("No translate text provided, not hitting Giphy")
+            raise Exception("No translate text provided, not hitting RightGIF")
 
         gif_url = giphy_translate(translate_text)
         if not gif_url:
@@ -78,18 +78,16 @@ def new_post():
 
 def giphy_translate(text):
     """
-    Giphy translate method, uses the Giphy API to find an appropriate gif url
+    RightGIF API, uses the Giphy API to find an appropriate gif url
     """
     try:
         params = {}
         params['s'] = text
-        params['rating'] = RATING
-        params['api_key'] = GIPHY_API_KEY
 
-        resp = requests.get('{}://api.giphy.com/v1/gifs/translate'.format(SCHEME), params=params, verify=True)
+        resp = requests.get('{}://https://rightgif.com/search/web'.format(SCHEME), params=params, verify=True)
 
         if resp.status_code is not requests.codes.ok:
-            logging.error('Encountered error using Giphy API, text=%s, status=%d, response_body=%s' % (text, resp.status_code, resp.json()))
+            logging.error('Encountered error using RightGIF API, text=%s, status=%d, response_body=%s' % (text, resp.status_code, resp.json()))
             return None
 
         resp_data = resp.json()
@@ -99,5 +97,5 @@ def giphy_translate(text):
 
         return urlunsplit(url)
     except Exception as err:
-        logging.error('unable to translate giphy :: {}'.format(err))
+        logging.error('unable to translate RightGIF :: {}'.format(err))
         return None
