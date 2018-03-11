@@ -82,7 +82,7 @@ def giphy_translate(text):
     """
     try:
         params = {}
-        params['s'] = text
+        params[''] = text
 
         resp = requests.get('{}://https://rightgif.com/search/web'.format(SCHEME), params=params, verify=True)
 
